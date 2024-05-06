@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
-use Livewire\Attributes\On; 
 use App\Models\Stock;
 
 
@@ -26,7 +25,6 @@ class StockListing extends Component
     {
         $this->stock = Stock::find($this->stockId);
         $this->fetchDataForScale();
-
     }
 
     public function fetchDataForScale()
@@ -49,7 +47,6 @@ class StockListing extends Component
             default: return [$today->copy()->subDay(), $today];
         }
     }
-    #[On('updateCharts')]
     public function setTimeScale($scale)
     {
         Log::info("setting time scale");

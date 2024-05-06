@@ -3,7 +3,6 @@
 namespace App\Livewire;
 use App\Models\Stock;
 use Livewire\Component;
-use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Log;
 
 
@@ -12,9 +11,9 @@ class Stockspage extends Component
 {
 
     public $stocks;
-    public function mount(Stock $stocks)
+    public function mount()
     {
-        $this->stocks = $stocks;
+        $this->stocks = Stock::all();
     }
     public function render()
     {
@@ -22,9 +21,9 @@ class Stockspage extends Component
             'stocks'=> $this->stocks
         ]);
     }
-    public function setTimeScale()
+    
+    public function testFunction()
     {
-        Log::info("setting time scale");
-
+        Log::info("testing wire");
     }
 }
