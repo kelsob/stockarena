@@ -4,7 +4,9 @@ namespace App\Livewire;
 
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+use Livewire\Attributes\On; 
 use App\Models\Stock;
+
 
 class StockListing extends Component
 {
@@ -20,19 +22,15 @@ class StockListing extends Component
     public $yearData1;
     public $allData;
 
-    protected $listeners = ['updateCharts' => 'setTimeScale'];
-
     public function mount()
     {
         $this->stock = Stock::find($this->stockId);
         $this->fetchDataForScale();
-        Log::info("mounting");
 
     }
 
     public function fetchDataForScale()
     {
-        Log::info("fetching data for scale");
         $this->priceHistories = $this->stock->priceHistories()
             ->whereBetween('created_at', $this->getTimeRange($this->timeScale))
             ->orderBy('created_at', 'asc')
@@ -41,7 +39,6 @@ class StockListing extends Component
 
     private function getTimeRange($scale)
     {
-        Log::info("getting time range");
         $today = now();
         switch ($scale) {
             case '1Hour': return [$today->copy()->subHour(), $today];
@@ -52,7 +49,7 @@ class StockListing extends Component
             default: return [$today->copy()->subDay(), $today];
         }
     }
-
+    #[On('updateCharts')]
     public function setTimeScale($scale)
     {
         Log::info("setting time scale");

@@ -22,7 +22,7 @@ class StockController extends Controller
         $stocks = Stock::all();
     
         // Pass the stocks data to the view
-        return view('stockspage', [
+        return view('livewire.stockspage', [
             'stocks' => $stocks
         ]);
     }

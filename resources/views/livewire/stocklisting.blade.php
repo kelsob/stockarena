@@ -1,6 +1,6 @@
 <div class="bg-white rounded-lg shadow-md p-4">
-    <h3 class="text-lg font-semibold mb-2">{{ $stock->name }}</h3>
-    <p class="text-gray-600 mb-1">{{ $stock->ticker }}</p>
+    <h3 class="text-lg font-semibold mb-2">{{ $stock->ticker }}</h3>
+    <p class="text-gray-600 mb-1">{{ $stock->name }}</p>
     <p class="text-gray-700 mb-1">${{ $priceHistories->last()->price ?? $stock->price }}</p>
     <p class="text-gray-600 mb-1">{{ $stock->motto }}</p>
     <p class="text-gray-700">{{ $stock->description }}</p>
@@ -11,7 +11,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    <div>
     new Chart(document.getElementById("stockPriceGraph-{{ $stock->id }}"), {
         type: 'line',
         data: {
@@ -30,18 +29,22 @@
         }]
         },
         options: {
-        scales: {
-            y: {
-            beginAtZero: true
+            scales: {
+                y: {
+                beginAtZero: true
+                }
+            },
+            elements: {
+                point: {
+                radius: 0,
+                hoverRadius: 6
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
             }
-        },
-        elements: {
-            point: {
-            radius: 0,
-            hoverRadius: 6
         }
-        }
-    }
     });
-    </div>
 </script>

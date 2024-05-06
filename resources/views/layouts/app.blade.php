@@ -8,7 +8,7 @@
     <!-- Styles -->
     <link href="{{ mix('resources/css/app.css') }}" rel="stylesheet"> <!-- Ensure path is correct -->
     <!-- Scripts -->
-    <script src="{{ mix('resources/js/app.js') }}" defer></script> <!-- Ensure path is correct and 'defer' to delay script execution -->
+    <script type="module" src="{{ mix('resources/js/app.js') }}" defer></script> <!-- Ensure path is correct and 'defer' to delay script execution -->
 </head>
 <body class="font-sans antialiased bg-gray-100">
     <div class="min-h-screen">
