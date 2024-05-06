@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Stock;
 use App\Services\StockTransactionService;
 use Illuminate\Http\Request;
-use App\Http\Livewire\StocksTable;
+use App\Livewire\Stockspage;
 
 class StockController extends Controller
 {
@@ -24,7 +24,7 @@ class StockController extends Controller
         // Pass the stocks data to the view
         return view('livewire.stockspage', [
             'stocks' => $stocks
-        ]);
+        ])->extends(Stockspage::class);;
     }
 
     public function show($stockId)
