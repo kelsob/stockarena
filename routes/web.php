@@ -22,7 +22,7 @@ Route::view('/profile', 'profilepage')->middleware(['auth'])->name('profile');
 Route::middleware('auth:api')->group(function () {
     // Stock routes
     Route::get('/stocks', [StockController::class, 'index']);
-    Route::get('/stocks/{id}', [StockController::class, 'show']);
+    Route::get('/stocks/{id}', [StockController::class, 'show'])->name('stocks.show');
     Route::post('/stocks', [StockController::class, 'store']);
     Route::put('/stocks/{id}', [StockController::class, 'update']);
 

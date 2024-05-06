@@ -5,35 +5,43 @@
     <p class="text-gray-600 mb-1">{{ $stock->motto }}</p>
     <p class="text-gray-700">{{ $stock->description }}</p>
 
-    <!-- Placeholder for the graph -->
-    <div wire:ignore id="stockPriceGraph" style="height: 300px;"></div>
+    <!-- Unique ID for each graph -->
+    <canvas id="stockPriceGraph-{{ $stock->id }}" class="stock-chart"></canvas>
 </div>
 
-@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    document.addEventListener('livewire:load', function () {
-    var data = @json($priceHistories->pluck('price', 'created_at'));
-    console.log(data); // Check what's output here
-
-    var chart = new Chart(document.getElementById('stockPriceGraph').getContext('2d'), {
+    <div>
+    new Chart(document.getElementById("stockPriceGraph-{{ $stock->id }}"), {
         type: 'line',
         data: {
-            labels: Object.keys(data),
-            datasets: [{
-                label: 'Price History',
-                data: Object.values(data),
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            }]
+        labels: JSON.parse('{!! $labelsJson !!}'),
+        datasets: [{
+            label: 'Price History',
+            data: JSON.parse('{!! $dataJson !!}'),
+            borderColor: 'rgb(75, 192, 192)',
+            borderWidth: 1,
+            tension: 0.1,
+            fill: {
+                target: 'origin',
+                above: 'rgb(75, 192, 192)',
+                below: 'rgb(75, 192, 192)'
+            }
+        }]
         },
         options: {
-            scales: {
-                y: {
-                    beginAtZero: false
-                }
+        scales: {
+            y: {
+            beginAtZero: true
             }
+        },
+        elements: {
+            point: {
+            radius: 0,
+            hoverRadius: 6
         }
+        }
+    }
     });
-});
+    </div>
 </script>
-@endpush

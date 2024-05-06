@@ -27,13 +27,19 @@ class StockController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show($stockId)
     {
-        $stock = Stock::find($id);
+        $stock = Stock::with('priceHistories')->find($stockId);
         if (!$stock) {
-            return response()->json(['message' => 'Stock not found'], 404);
+            abort(404, 'Stock not found');
         }
-        return response()->json($stock);
+
+        $dates = $stock->priceHistories->pluck('created_at')->map(function ($date) {
+            return $date->format('Y-m-d'); // Adjust date format as necessary
+        });
+        $prices = $stock->priceHistories->pluck('price');
+
+        return view('stocks.show', compact('stock', 'dates', 'prices')); // Ensure the view name matches your setup
     }
 
     public function update(Request $request, $id)
