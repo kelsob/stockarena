@@ -5,8 +5,6 @@ use App\Models\Stock;
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
 
-
-
 class Stockspage extends Component
 {
 
@@ -19,7 +17,7 @@ class Stockspage extends Component
     {
         return view('livewire.stockspage', [
             'stocks'=> $this->stocks
-        ]);
+        ])->layout('layouts.app');
     }
     
     public function testFunction()

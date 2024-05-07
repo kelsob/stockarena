@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TransactionController;
-
+use App\Livewire\Stockspage;
 
 
 // Basic views
@@ -12,7 +12,7 @@ use App\Http\Controllers\TransactionController;
 require __DIR__.'/auth.php';
 
 Route::view('/', 'homepage')->name('/');
-Route::get('/stockspage', [StockController::class, 'index'])->name('stockspage');
+Route::get('/stockspage', Stockspage::class)->name('stockspage');
 Route::view('/portfolio', 'portfoliopage')->name('portfoliopage');
 Route::view('/community', 'communitypage')->name('communitypage');
 Route::view('/profile', 'profilepage')->middleware(['auth'])->name('profile');
