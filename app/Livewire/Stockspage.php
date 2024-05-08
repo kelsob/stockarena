@@ -7,21 +7,19 @@ use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\On;
 use App\Models\Stock;
 use Livewire\Attributes\Layout;
+use Livewire\WithPagination;
+
 
 #[Layout('components.layouts.app')] 
 class Stockspage extends Component
 {
     
-    public $stocks;
-    public function mount()
-    {
-        $this->stocks = Stock::all();
-    }
+    use WithPagination;
     public function render()
     {
         return view('livewire.stockspage',
         [
-            'stocks' => $this->stocks
+            'stocks' => Stock::paginate(12),
         ]);
     }
 

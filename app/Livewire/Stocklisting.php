@@ -65,7 +65,6 @@ class StockListing extends Component
     {
         $this->timeScale = $scale;
         $this->fetchDataForScale();
-        Log::info($this->priceHistories);
     }
 
     public function render()

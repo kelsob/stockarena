@@ -6,7 +6,7 @@
     </div>
     <div class="flex justify-between items-center mb-0">
         <p class="text-gray-600 mb-1">{{ $stock->name }}</p>
-        <p class="mb-1 {{ $priceDifference >= 0 ? 'text-green-500' : 'text-red-500' }}">
+        <p class="mb-1 {{ $priceDifference >= 0 ? 'text-green-500' : 'text-red-500' }} font-semibold">
             {{ $priceDifference >= 0 ? '+$' : '-$' }}{{ number_format(abs($priceDifference), 2) }} ({{ $priceDifference >= 0 ? '+' : '-' }}{{ number_format(abs($percentageDifference), 2) }}%)
         </p>
     </div>
