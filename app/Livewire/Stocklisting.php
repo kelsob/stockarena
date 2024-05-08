@@ -5,14 +5,14 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use App\Models\Stock;
-
+use Livewire\Attributes\On;
 
 class StockListing extends Component
 {
     public $stockId;
     public $stock;
     public $priceHistories;
-    public $timeScale = '1Day';  // Default time scale is one day.
+    public $timeScale = '1D';  // Default time scale is one day.
 
     public $hourData1;
     public $dayData1;
@@ -20,6 +20,9 @@ class StockListing extends Component
     public $monthData1;
     public $yearData1;
     public $allData;
+
+    protected $listeners = ['timeScaleChanged' => 'setTimeScale'];
+
 
     public function mount()
     {
@@ -39,19 +42,19 @@ class StockListing extends Component
     {
         $today = now();
         switch ($scale) {
-            case '1Hour': return [$today->copy()->subHour(), $today];
-            case '1Day': return [$today->copy()->subDay(), $today];
-            case '1Week': return [$today->copy()->subWeek(), $today];
-            case '1Month': return [$today->copy()->subMonth(), $today];
-            case '1Year': return [$today->copy()->subYear(), $today];
+            case '1H': return [$today->copy()->subHour(), $today];
+            case '1D': return [$today->copy()->subDay(), $today];
+            case '1W': return [$today->copy()->subWeek(), $today];
+            case '1M': return [$today->copy()->subMonth(), $today];
+            case '1Y': return [$today->copy()->subYear(), $today];
             default: return [$today->copy()->subDay(), $today];
         }
     }
-    public function setTimeScale($scale)
+    public function setTimeScale(string $scale)
     {
-        Log::info("setting time scale");
         $this->timeScale = $scale;
         $this->fetchDataForScale();
+        Log::info($this->priceHistories);
     }
 
     public function render()

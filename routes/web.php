@@ -4,15 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TransactionController;
 use App\Livewire\Stockspage;
-
+use app\Livewire\Test;
 
 // Basic views
 
 // Authentication routes (presuming they are handled via included routes)
 require __DIR__.'/auth.php';
 
-Route::view('/', 'homepage')->name('/');
 Route::get('/stockspage', Stockspage::class)->name('stockspage');
+
+Route::view('/', 'homepage')->name('/');
 Route::view('/portfolio', 'portfoliopage')->name('portfoliopage');
 Route::view('/community', 'communitypage')->name('communitypage');
 Route::view('/profile', 'profilepage')->middleware(['auth'])->name('profile');
