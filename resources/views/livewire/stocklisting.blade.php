@@ -1,13 +1,13 @@
 <div class="bg-white rounded-lg shadow-md p-4">
     <!-- Flex container for header with space between items -->
-    <div class="flex justify-between items-center mb-2">
+    <div class="flex justify-between items-center mb-0">
         <h3 class="text-lg font-semibold">{{ $stock->ticker }}</h3>
         <p class="text-lg font-bold">${{ number_format($priceHistories->last()->price ?? $stock->price, 2) }}</p>
     </div>
-    <div class="flex justify-between items-center mb-2">
+    <div class="flex justify-between items-center mb-0">
         <p class="text-gray-600 mb-1">{{ $stock->name }}</p>
         <p class="mb-1 {{ $priceDifference >= 0 ? 'text-green-500' : 'text-red-500' }}">
-            {{ $priceDifference >= 0 ? '+$' : '-$' }}{{ number_format(abs($priceDifference), 2) }}
+            {{ $priceDifference >= 0 ? '+$' : '-$' }}{{ number_format(abs($priceDifference), 2) }} ({{ $priceDifference >= 0 ? '+' : '-' }}{{ number_format(abs($percentageDifference), 2) }}%)
         </p>
     </div>
     <p class="text-gray-600 mb-1">{{ $stock->motto }}</p>

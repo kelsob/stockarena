@@ -23,6 +23,7 @@ class StockListing extends Component
 
 
     public $priceDifference = null;
+    public $percentageDifference = null;
 
     protected $listeners = ['timeScaleChanged' => 'setTimeScale'];
 
@@ -41,8 +42,10 @@ class StockListing extends Component
             ->get(['price', 'created_at']);
         if ($this->priceHistories->isNotEmpty()) {
             $this->priceDifference = $this->priceHistories->last()->price - $this->priceHistories->first()->price;
+            $this->percentageDifference = ($this->priceDifference / $this->priceHistories->first()->price) * 100;
         } else {
             $this->priceDifference = 0;
+            $this->percentageDifference = 0;
         }
     }
 
@@ -84,6 +87,7 @@ class StockListing extends Component
         return view('livewire.stocklisting', [
             'stock' => $this->stock,
             'priceDifference' => $this->priceDifference,
+            'percentageDifference' => $this->percentageDifference,
             'labelsJson' => $labelsJson,
             'dataJson' => $dataJson
         ]);
