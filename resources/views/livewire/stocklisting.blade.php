@@ -1,7 +1,15 @@
 <div class="bg-white rounded-lg shadow-md p-4">
-    <h3 class="text-lg font-semibold mb-2">{{ $stock->ticker }}</h3>
-    <p class="text-gray-600 mb-1">{{ $stock->name }}</p>
-    <p class="text-gray-700 mb-1">${{ $priceHistories->last()->price ?? $stock->price }}</p>
+    <!-- Flex container for header with space between items -->
+    <div class="flex justify-between items-center mb-2">
+        <h3 class="text-lg font-semibold">{{ $stock->ticker }}</h3>
+        <p class="text-lg font-bold">${{ number_format($priceHistories->last()->price ?? $stock->price, 2) }}</p>
+    </div>
+    <div class="flex justify-between items-center mb-2">
+        <p class="text-gray-600 mb-1">{{ $stock->name }}</p>
+        <p class="mb-1 {{ $priceDifference >= 0 ? 'text-green-500' : 'text-red-500' }}">
+            {{ $priceDifference >= 0 ? '+$' : '-$' }}{{ number_format(abs($priceDifference), 2) }}
+        </p>
+    </div>
     <p class="text-gray-600 mb-1">{{ $stock->motto }}</p>
     <p class="text-gray-700">{{ $stock->description }}</p>
 

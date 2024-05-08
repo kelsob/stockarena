@@ -12,7 +12,7 @@
     </head>
     <body class="bg-gray-100">
         <header class="bg-blue-500 text-white mb-4">
-            <div class="container mx-auto flex justify-between items-center p-6">
+            <div class="container mx-auto flex justify-between items-center p-6 max-w-screen-xl">
                 <h1 class="text-lg font-bold">{{ config('app.name', 'Your Website') }}</h1>
                 <nav>
                     <a href="/" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Home</a>

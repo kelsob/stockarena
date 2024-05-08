@@ -1,4 +1,4 @@
-<div>
+<div class="mx-auto max-w-screen-xl">
     <div class="flex justify-center space-x-2 mb-4">
         <button wire:click="$dispatch('timeScaleChanged', ['1H'])" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">1H</button>
         <button wire:click="$dispatch('timeScaleChanged', ['1D'])" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">1D</button>

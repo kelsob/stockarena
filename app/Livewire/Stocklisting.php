@@ -21,6 +21,9 @@ class StockListing extends Component
     public $yearData1;
     public $allData;
 
+
+    public $priceDifference = null;
+
     protected $listeners = ['timeScaleChanged' => 'setTimeScale'];
 
 
@@ -36,6 +39,11 @@ class StockListing extends Component
             ->whereBetween('created_at', $this->getTimeRange($this->timeScale))
             ->orderBy('created_at', 'asc')
             ->get(['price', 'created_at']);
+        if ($this->priceHistories->isNotEmpty()) {
+            $this->priceDifference = $this->priceHistories->last()->price - $this->priceHistories->first()->price;
+        } else {
+            $this->priceDifference = 0;
+        }
     }
 
     private function getTimeRange($scale)
@@ -75,6 +83,7 @@ class StockListing extends Component
         // Pass these JSON strings to the view
         return view('livewire.stocklisting', [
             'stock' => $this->stock,
+            'priceDifference' => $this->priceDifference,
             'labelsJson' => $labelsJson,
             'dataJson' => $dataJson
         ]);
