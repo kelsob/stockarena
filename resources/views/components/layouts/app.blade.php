@@ -16,8 +16,8 @@
                 <h1 class="text-lg font-bold">{{ config('app.name', 'Your Website') }}</h1>
                 <nav>
                     <a href="/" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Home</a>
-                    <a href="/about" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Market</a>
-                    <a href="/services" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Portfolio</a>
+                    <a href="/stockspage" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Market</a>
+                    <a href="/portfolio" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Portfolio</a>
                 </nav>
             </div>
         </header>
