@@ -25,7 +25,10 @@ class StockListing extends Component
     public $priceDifference = null;
     public $percentageDifference = null;
 
-    protected $listeners = ['timeScaleChanged' => 'setTimeScale'];
+    public $chartType = 'line';
+
+    protected $listeners = ['timeScaleChanged' => 'setTimeScale',
+                            'chartTypeChanged' => 'setChartType'];
 
 
     public function mount()
@@ -67,8 +70,14 @@ class StockListing extends Component
         $this->fetchDataForScale();
     }
 
+    public function setChartType(string $chartType)
+    {
+        $this->chartType = $chartType;
+    }
+
     public function render()
     {
+        Log::info($this->chartType);
         // Prepare labels and data arrays from priceHistories
         $labels = $this->priceHistories->map(function ($entry) {
             return $entry->created_at->format('Y-m-d'); // Format date as you prefer
@@ -88,7 +97,8 @@ class StockListing extends Component
             'priceDifference' => $this->priceDifference,
             'percentageDifference' => $this->percentageDifference,
             'labelsJson' => $labelsJson,
-            'dataJson' => $dataJson
+            'dataJson' => $dataJson,
+            'chartType'=> $this->chartType,
         ]);
     }
 }

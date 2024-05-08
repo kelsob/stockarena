@@ -20,7 +20,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     new Chart(document.getElementById("stockPriceGraph-{{ $stock->id }}"), {
-        type: 'line',
+        type: '{{ $chartType }}',
         data: {
         labels: JSON.parse('{!! $labelsJson !!}'),
         datasets: [{
@@ -31,8 +31,8 @@
             tension: 0.1,
             fill: {
                 target: 'origin',
-                above: 'rgb(75, 192, 192)',
-                below: 'rgb(75, 192, 192)'
+                above: 'rgb(152, 237, 237)',
+                below: 'rgb(152, 237, 237)'
             }
         }]
         },
