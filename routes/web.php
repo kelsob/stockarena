@@ -20,7 +20,6 @@ Route::get('/stocks/{stockId}', StockDetails::class)->name('stockdetails');
 
 // Stock routes
 Route::get('/stocks', [StockController::class, 'index']);
-//Route::get('/stocks/{id}', [StockController::class, 'show'])->name('stocks.show');
 Route::post('/stocks', [StockController::class, 'store']);
 Route::put('/stocks/{id}', [StockController::class, 'update']);
 
