@@ -1,21 +1,21 @@
-<div class="bg-white rounded-lg shadow-md p-4">
-    <!-- Flex container for header with space between items -->
-    <div class="flex justify-between items-center mb-0">
-        <h3 class="text-lg font-semibold">{{ $stock->ticker }}</h3>
-        <p class="text-lg font-bold">${{ number_format($priceHistories->last()->price ?? $stock->price, 2) }}</p>
+<a href="{{ route('Stockdetails', $stock->id) }}" class="block text-decoration-none">
+    <div class="bg-white rounded-lg shadow-md p-4 hover:bg-gray-100">
+        <div class="flex justify-between items-center mb-0">
+            <h3 class="text-lg font-semibold">{{ $stock->ticker }}</h3>
+            <p class="text-lg font-bold">${{ number_format($priceHistories->last()->price ?? $stock->price, 2) }}</p>
+        </div>
+        <div class="flex justify-between items-center mb-0">
+            <p class="text-gray-600 mb-1">{{ $stock->name }}</p>
+            <p class="mb-1 {{ $priceDifference >= 0 ? 'text-green-500' : 'text-red-500' }} font-semibold">
+                {{ $priceDifference >= 0 ? '+$' : '-$' }}{{ number_format(abs($priceDifference), 2) }} ({{ $priceDifference >= 0 ? '+' : '-' }}{{ number_format(abs($percentageDifference), 2) }}%)
+            </p>
+        </div>
+        <p class="text-gray-600 mb-1">{{ $stock->motto }}</p>
+        <p class="text-gray-700">{{ $stock->description }}</p>
+        <canvas id="stockPriceGraph-{{ $stock->id }}" class="stock-chart"></canvas>
     </div>
-    <div class="flex justify-between items-center mb-0">
-        <p class="text-gray-600 mb-1">{{ $stock->name }}</p>
-        <p class="mb-1 {{ $priceDifference >= 0 ? 'text-green-500' : 'text-red-500' }} font-semibold">
-            {{ $priceDifference >= 0 ? '+$' : '-$' }}{{ number_format(abs($priceDifference), 2) }} ({{ $priceDifference >= 0 ? '+' : '-' }}{{ number_format(abs($percentageDifference), 2) }}%)
-        </p>
-    </div>
-    <p class="text-gray-600 mb-1">{{ $stock->motto }}</p>
-    <p class="text-gray-700">{{ $stock->description }}</p>
+</a>
 
-    <!-- Unique ID for each graph -->
-    <canvas id="stockPriceGraph-{{ $stock->id }}" class="stock-chart"></canvas>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>

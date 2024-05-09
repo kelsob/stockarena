@@ -5,9 +5,11 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use App\Models\Stock;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 
-class StockListing extends Component
+#[Layout('components.layouts.app')] 
+class StockDetails extends Component
 {
     public $stockId;
     public $stock;
@@ -30,7 +32,7 @@ class StockListing extends Component
                             'chartTypeChanged' => 'setChartType'];
 
 
-    public function mount()
+    public function mount($stockId)
     {
         $this->stock = Stock::find($this->stockId);
         $this->fetchDataForScale();
@@ -91,7 +93,7 @@ class StockListing extends Component
         $dataJson = json_encode($data);
     
         // Pass these JSON strings to the view
-        return view('livewire.stocklisting', [
+        return view('livewire.stockdetails', [
             'stock' => $this->stock,
             'priceDifference' => $this->priceDifference,
             'percentageDifference' => $this->percentageDifference,

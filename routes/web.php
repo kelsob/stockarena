@@ -6,6 +6,7 @@ use App\Http\Controllers\TransactionController;
 use App\Livewire\Stockspage;
 use App\Livewire\Home;
 use App\Livewire\Portfolio;
+use App\Livewire\StockDetails;
 
 // Authentication routes (presuming they are handled via included routes)
 require __DIR__.'/auth.php';
@@ -15,9 +16,11 @@ Route::get('/stockspage', Stockspage::class)->name('stockspage');
 Route::get('/portfolio', Portfolio::class)->name('porfolio');
 Route::view('/profile', 'profilepage')->middleware(['auth'])->name('profile');
 
+Route::get('/stocks/{id}', StockDetails::class)->name('stockdetails');
+
 // Stock routes
 Route::get('/stocks', [StockController::class, 'index']);
-Route::get('/stocks/{id}', [StockController::class, 'show'])->name('stocks.show');
+//Route::get('/stocks/{id}', [StockController::class, 'show'])->name('stocks.show');
 Route::post('/stocks', [StockController::class, 'store']);
 Route::put('/stocks/{id}', [StockController::class, 'update']);
 
