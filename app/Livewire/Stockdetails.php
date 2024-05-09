@@ -32,11 +32,13 @@ class StockDetails extends Component
                             'chartTypeChanged' => 'setChartType'];
 
 
-    public function mount($stockId)
+    public function mount(string $stockId)
     {
-        $this->stock = Stock::find($this->stockId);
+        // Use the parameter directly instead of $this->stockId
+        $this->stock = Stock::find($stockId);
         $this->fetchDataForScale();
     }
+                            
 
     public function fetchDataForScale()
     {

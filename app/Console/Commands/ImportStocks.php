@@ -18,7 +18,7 @@ class ImportStocks extends Command
 
     public function handle()
     {
-        $csv = Reader::createFromPath(storage_path('app/public/stocks.csv'), 'r');
+        $csv = Reader::createFromPath(storage_path('public/stocks.csv'), 'r');
         $csv->setHeaderOffset(0);
 
         foreach ($csv as $record) {

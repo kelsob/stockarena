@@ -16,7 +16,7 @@ Route::get('/stockspage', Stockspage::class)->name('stockspage');
 Route::get('/portfolio', Portfolio::class)->name('porfolio');
 Route::view('/profile', 'profilepage')->middleware(['auth'])->name('profile');
 
-Route::get('/stocks/{id}', StockDetails::class)->name('stockdetails');
+Route::get('/stocks/{stockId}', StockDetails::class)->name('stockdetails');
 
 // Stock routes
 Route::get('/stocks', [StockController::class, 'index']);

@@ -1,4 +1,4 @@
-<a href="{{ route('Stockdetails', $stock->id) }}" class="block text-decoration-none">
+<a href="{{ route('stockdetails', ['stockId' => $stock->id]) }}" class="block text-decoration-none">
     <div class="bg-white rounded-lg shadow-md p-4 hover:bg-gray-100">
         <div class="flex justify-between items-center mb-0">
             <h3 class="text-lg font-semibold">{{ $stock->ticker }}</h3>
