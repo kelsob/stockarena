@@ -45,7 +45,7 @@
             elements: {
                 point: {
                 radius: 0,
-                hoverRadius: 6
+                hoverRadius: 6,
                 }
             },
             plugins: {
