@@ -5,14 +5,18 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use App\Models\Stock;
+use Livewire\Attributes\Reactive;
 use Livewire\Attributes\On;
 
 class StockListing extends Component
 {
-    public $stockId;
     public $stock;
     public $priceHistories;
+    #[Reactive]
     public $timeScale = '1D';  // Default time scale is one day.
+    #[Reactive]
+    public $chartType = 'line';
+
 
     public $hourData1;
     public $dayData1;
@@ -24,15 +28,12 @@ class StockListing extends Component
     public $priceDifference = null;
     public $percentageDifference = null;
 
-    public $chartType = 'line';
 
-    protected $listeners = ['timeScaleChanged' => 'setTimeScale',
-                            'chartTypeChanged' => 'setChartType'];
-
-
-    public function mount()
+    public function mount($stock, $timeScale, $chartType)
     {
-        $this->stock = Stock::find($this->stockId);
+        $this->stock = $stock;
+        $this->timeScale = $timeScale;
+        $this->chartType = $chartType;
         $this->fetchDataForScale();
     }
 
@@ -44,7 +45,15 @@ class StockListing extends Component
             ->get(['price', 'created_at']);
         if ($this->priceHistories->isNotEmpty()) {
             $this->priceDifference = $this->priceHistories->last()->price - $this->priceHistories->first()->price;
-            $this->percentageDifference = ($this->priceDifference / $this->priceHistories->first()->price) * 100;
+
+            if ($this->priceHistories->first()->price == 0)
+            {
+                $this->percentageDifference = 0;
+            }
+            else
+            {
+                $this->percentageDifference = ($this->priceDifference / $this->priceHistories->first()->price) * 100;
+            }
         } else {
             $this->priceDifference = 0;
             $this->percentageDifference = 0;
@@ -76,7 +85,9 @@ class StockListing extends Component
 
     public function render()
     {
+        Log::info("stock listing re-rendering.");
         Log::info($this->chartType);
+        Log::info($this->timeScale);
         // Prepare labels and data arrays from priceHistories
         $labels = $this->priceHistories->map(function ($entry) {
             return $entry->created_at->format('Y-m-d'); // Format date as you prefer
@@ -92,12 +103,8 @@ class StockListing extends Component
     
         // Pass these JSON strings to the view
         return view('livewire.stocklisting', [
-            'stock' => $this->stock,
-            'priceDifference' => $this->priceDifference,
-            'percentageDifference' => $this->percentageDifference,
             'labelsJson' => $labelsJson,
             'dataJson' => $dataJson,
-            'chartType'=> $this->chartType,
         ]);
     }
 }

@@ -16,7 +16,6 @@
     </div>
 </a>
 
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     new Chart(document.getElementById("stockPriceGraph-{{ $stock->id }}"), {
@@ -46,6 +45,7 @@
                 point: {
                 radius: 0,
                 hoverRadius: 6,
+                
                 }
             },
             plugins: {

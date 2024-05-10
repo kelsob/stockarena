@@ -80,7 +80,6 @@ class StockDetails extends Component
 
     public function render()
     {
-        Log::info($this->chartType);
         // Prepare labels and data arrays from priceHistories
         $labels = $this->priceHistories->map(function ($entry) {
             return $entry->created_at->format('Y-m-d'); // Format date as you prefer

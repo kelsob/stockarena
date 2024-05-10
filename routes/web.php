@@ -17,7 +17,7 @@ Route::get('/portfolio', Portfolio::class)->name('porfolio');
 Route::view('/profile', 'profilepage')->middleware(['auth'])->name('profile');
 
 Route::get('/stocks/{stockId}', StockDetails::class)->name('stockdetails');
-
+Route::post('/logout', [AuthController::class, 'logout']);
 // Stock routes
 Route::get('/stocks', [StockController::class, 'index']);
 Route::post('/stocks', [StockController::class, 'store']);

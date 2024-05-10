@@ -16,7 +16,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach ($stocks as $stock)
-            <livewire:stock-listing :stockId="$stock->id" :key="'stock-listing-' . $stock->id"/>
+            <livewire:stock-listing :stock="$stock" :timeScale="$timeScale" :chartType="$chartType" :key="'stock-listing-' . $stock->id"/>
         @endforeach
     </div>
     <div class="mt-4">

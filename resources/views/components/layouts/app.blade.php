@@ -20,7 +20,7 @@
                     <a href="/portfolio" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Portfolio</a>
                 </nav>
                 @auth
-                    <a href="/account" class="px-3 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-800">Account</a>
+                    <livewire:layout.navigation />
                 @else
                     <a href="/login" class="px-3 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-800">Sign-In</a>
                 @endauth
