@@ -30,6 +30,6 @@ module.exports = {
       './vendor/laravel/jetstream/**/*.blade.php',
       './vendor/livewire/livewire/**/*.blade.php',
     ],
-    // Other settings
+
   }
   
